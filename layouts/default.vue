@@ -69,7 +69,7 @@ export default {
         },
       ],
       miniVariant: false,
-      title: "clinical time reservation",
+      title: "Clinical Time Reservation",
     };
   },
 
