@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const mongoose = require('mongoose')
+const User = require('../models/user.model')
+const utils = require('../utils')
 const resavaionController = require('../controllers/resavation.controller')
 
 router.post('/', (req, res, next) => {
-    if (req.body.userId && mongoose.isValidObjectId(req.body.userId) && req.body.date && req.body.clinicId) {
+    if (req.body.date && req.body.clinicId) {
         next()
     }
     else {
@@ -11,8 +12,40 @@ router.post('/', (req, res, next) => {
             message: 'Invalid request'
         })
     }
+}, async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1]
+    const { email } = utils.verifyToken(token)
+    const user = await User.findOne({ email })
+    if (!user) {
+        return res.status(400).json({
+            message: 'User not found'
+        })
+    }
+    if (!user.verified) {
+        return res.status(400).json({
+            message: 'User not verified'
+        })
+    }
+    req.user = user
+    next()
 }, resavaionController.create)
-router.get('/:userId', resavaionController.getUserResavations)
+router.get('/:userId', async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1]
+    const { email } = utils.verifyToken(token)
+    const user = await User.findOne({ email })
+    if (!user) {
+        return res.status(400).json({
+            message: 'User not found'
+        })
+    }
+    if (!user.verified) {
+        return res.status(400).json({
+            message: 'User not verified'
+        })
+    }
+    req.user = user
+    next()
+}, resavaionController.getUserResavations)
 router.delete('/:id', resavaionController.deleteReservation)
 
 module.exports = router

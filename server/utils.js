@@ -28,14 +28,17 @@ function assignAccessToken(user) {
 }
 
 async function comparePassword(password, hash) {
-    console.log(password, hash)
     const res = await bcrypt.compare(password, hash);
-    console.log(res)
     return res;
+}
+
+function verifyToken(token) {
+    return jwt.verify(token, 'secret');
 }
 
 module.exports = {
     sendVerificationEmail,
     assignAccessToken,
-    comparePassword
+    comparePassword,
+    verifyToken
 }

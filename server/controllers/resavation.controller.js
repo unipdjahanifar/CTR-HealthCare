@@ -2,7 +2,7 @@ const Resavation = require('../models/resavation.model')
 const Clinic = require('../models/clinic.model')
 const create = async (req, res) => {
     try {
-        const userReservations = await Resavation.find({date: req.body.date, userId: req.body.userId})
+        const userReservations = await Resavation.find({date: req.body.date, userId: req.user._id})
         if (userReservations.length > 0) {
             return res.status(400).json({
                 message: 'You already have a reservation for this date'

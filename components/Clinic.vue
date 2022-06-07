@@ -100,13 +100,21 @@ export default {
       const now = new Date().toLocaleDateString("en-CA");
       const date = `${now}T${this.selection}:00`;
       this.$axios
-        .post("http://localhost:8000/api/resevation", {
-          clinicId: this.clinic._id,
-          userId: localStorage.getItem("id"),
-          date,
-        })
+        .post(
+          "http://localhost:8000/api/resevation",
+          {
+            clinicId: this.clinic._id,
+            userId: localStorage.getItem("id"),
+            date,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
         .then((response) => {
-          this.$router.push('/reservations');
+          this.$router.push("/reservations");
         })
         .catch((error) => {
           this.error = true;
