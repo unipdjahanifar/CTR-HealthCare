@@ -8,7 +8,7 @@
       ></v-progress-linear>
     </template>
 
-    <v-img height="250" src="/img/clinic.jpg"></v-img>
+    <v-img height="250" :src="clinic.image"></v-img>
 
     <v-card-title>{{ clinic.name }} Clinic</v-card-title>
 
