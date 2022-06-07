@@ -104,7 +104,6 @@ export default {
           "http://localhost:8000/api/resevation",
           {
             clinicId: this.clinic._id,
-            userId: localStorage.getItem("id"),
             date,
           },
           {
