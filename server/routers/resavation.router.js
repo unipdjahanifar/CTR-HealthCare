@@ -14,8 +14,10 @@ router.post('/', (req, res, next) => {
     }
 }, async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1]
+
     const { email } = utils.verifyToken(token)
     const user = await User.findOne({ email })
+    console.log(user)
     if (!user) {
         return res.status(400).json({
             message: 'User not found'
@@ -29,7 +31,7 @@ router.post('/', (req, res, next) => {
     req.user = user
     next()
 }, resavaionController.create)
-router.get('/:userId', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1]
     const { email } = utils.verifyToken(token)
     const user = await User.findOne({ email })

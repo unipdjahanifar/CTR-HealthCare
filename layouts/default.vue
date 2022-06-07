@@ -79,7 +79,7 @@ export default {
 
   methods: {
     checkUser() {
-      if (!localStorage.getItem("id") || !localStorage.getItem("token")) {
+      if (!localStorage.getItem("token")) {
         this.loggedIn = false;
         if (this.$route.path !== "/login" && this.$route.path !== "/signup") {
           this.$router.push("/login");
@@ -92,7 +92,7 @@ export default {
       }
     },
     logout() {
-      localStorage.removeItem("id");
+      localStorage.removeItem("token");
       location = "/login";
     },
   },

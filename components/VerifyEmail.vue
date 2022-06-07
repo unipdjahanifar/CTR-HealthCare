@@ -64,6 +64,7 @@ export default {
         .then((response) => {
           this.loading = false;
           localStorage.setItem("token", response.data.accessToken);
+          localStorage.removeItem("id");
           location = '/'
         })
         .catch((error) => {

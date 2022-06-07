@@ -67,7 +67,6 @@ export default {
         })
         .then((response) => {
           this.loading = false;
-          localStorage.setItem("id", response.data.user._id);
           localStorage.setItem("token", response.data.accessToken);
           location = '/'
         })

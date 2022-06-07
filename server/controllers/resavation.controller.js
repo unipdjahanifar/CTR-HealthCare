@@ -8,7 +8,10 @@ const create = async (req, res) => {
                 message: 'You already have a reservation for this date'
             })
         }
-        const resavation = await Resavation.create(req.body)
+        const resavation = await Resavation.create({
+            ...req.body,
+            userId: req.user._id
+        })
 
         res.status(201).json({
             message: 'Resavation created successfully',
@@ -25,7 +28,7 @@ const create = async (req, res) => {
 
 const getUserResavations = async (req, res) => {
     try {
-        let resavations = await Resavation.find({ userId: req.params.userId })
+        let resavations = await Resavation.find({ userId: req.user._id })
         const clinics_promises = resavations.map((resavation) => {
             return Clinic.findById(resavation.clinicId)
         })

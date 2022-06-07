@@ -44,9 +44,11 @@ export default {
   methods: {
     getReservations() {
       this.$axios
-        .get(
-          `http://localhost:8000/api/resevation/${localStorage.getItem("id")}`
-        )
+        .get(`http://localhost:8000/api/resevation`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           this.reservations = response.data.resavations;
         })
