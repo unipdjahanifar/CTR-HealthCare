@@ -57,7 +57,7 @@ export default {
       this.error = false;
       this.loading = true;
       this.$axios
-        .post("http://localhost:5000/api/user/verify", {
+        .post("http://localhost:8000/api/user/verify", {
           userId: localStorage.getItem("id"),
           verificationCode: this.verificationCode,
         })

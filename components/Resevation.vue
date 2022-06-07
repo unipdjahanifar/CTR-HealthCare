@@ -45,7 +45,7 @@ export default {
     getReservations() {
       this.$axios
         .get(
-          `http://localhost:5000/api/resevation/${localStorage.getItem("id")}`
+          `http://localhost:8000/api/resevation/${localStorage.getItem("id")}`
         )
         .then((response) => {
           this.reservations = response.data.resavations;
@@ -57,7 +57,7 @@ export default {
 
     deleteReservation(id) {
       this.$axios
-        .delete(`http://localhost:5000/api/resevation/${id}`)
+        .delete(`http://localhost:8000/api/resevation/${id}`)
         .then((response) => {
           this.getReservations();
         })

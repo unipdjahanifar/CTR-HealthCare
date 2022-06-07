@@ -28,7 +28,7 @@ export default {
     getClinics() {
       this.loading = true;
       this.$axios
-        .get("http://localhost:5000/api/clinic")
+        .get("http://localhost:8000/api/clinic")
         .then((response) => {
           this.clinics = response.data.clinics;
           this.loading = false;

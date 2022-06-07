@@ -137,7 +137,7 @@ export default {
       this.error = false;
       this.loading = true;
       this.$axios
-        .post("http://localhost:5000/api/user/signup", {
+        .post("http://localhost:8000/api/user/signup", {
           name: this.name,
           email: this.email,
           password: this.password,
