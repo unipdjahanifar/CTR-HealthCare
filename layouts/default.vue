@@ -79,7 +79,7 @@ export default {
 
   methods: {
     checkUser() {
-      if (!localStorage.getItem("id")) {
+      if (!localStorage.getItem("id") || !localStorage.getItem("token")) {
         this.loggedIn = false;
         if (this.$route.path !== "/login" && this.$route.path !== "/signup") {
           this.$router.push("/login");

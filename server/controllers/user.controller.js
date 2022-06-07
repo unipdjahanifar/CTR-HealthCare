@@ -63,7 +63,7 @@ const login = async (req, res) => {
                 message: 'User not found'
             })
         }
-        console.log(user)
+       
         if (!user.verified) {
             return res.status(400).json({
                 message: 'User not verified'
@@ -76,10 +76,11 @@ const login = async (req, res) => {
             })
         }
 
-        // const accessToken = utils.assignAccessToken(user)
+        const accessToken = utils.assignAccessToken(user)
 
         res.status(200).json({
             message: 'User logged in successfully',
+            accessToken,
             user
         })
 
